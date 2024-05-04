@@ -8,7 +8,7 @@ https://gist.github.com/mrbid/1eacdd9d9239b2d324a3fa88591ff852
 
 The dataset all this was trained on is a synthetic dataset I generated from StyleGAN2 using [ThisPersonDoesNotExist.com](https://ThisPersonDoesNotExist.com) and then feeding those synthetic 2D images into [TripoSR](https://github.com/VAST-AI-Research/TripoSR) to turn them into 3D heads, the dataset is on Hugging Face here: https://huggingface.co/datasets/tfnn/FaceTo3D
 
-The first attempt was PT-NePC in ["headsnet"](headsnet). HeadsNet was the highest quality attempt. It took a simple two vector input to produce a random full color 3D point cloud of a head. It includes the scraper, a viewer for the scraped models, the dataset generator, training and prediction code.
+The first attempt was my [PT-NePC](https://gist.github.com/mrbid/1eacdd9d9239b2d324a3fa88591ff852) approach in ["headsnet"](headsnet). HeadsNet was the highest quality attempt. It took a simple two vector input to produce a random full color 3D point cloud of a head. It includes the scraper, a viewer for the scraped models, the dataset generator, training and prediction code.
 
 The second attempt was to simplify the problem down to producing a 32^3 grayscale voxel volume of a head from a 32x32 grayscale input image.
 - [facenet1](facenet1) has the dataset generation code and the first attempt at FaceToVoxel. It attempts to train one large FNN/MLP on the problem.
