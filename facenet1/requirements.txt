@@ -1,0 +1,11 @@
+omegaconf
+Pillow
+einops
+transformers
+trimesh
+rembg
+huggingface-hub
+imageio[ffmpeg]
+torch
+git+https://github.com/tatsy/torchmcubes.git
+gradio
