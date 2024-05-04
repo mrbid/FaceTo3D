@@ -6,7 +6,7 @@ The Hugging Face repository has the full project including the dataset, this Git
 It all started with this rough idea that I had after spending much time looking into Neural Radiance Fields (NeRF) for generative 3D:
 https://gist.github.com/mrbid/1eacdd9d9239b2d324a3fa88591ff852
 
-The dataset all this was trained on is a synthetic dataset I generated from StyleGAN2 using [ThisPersonDoesNotExist.com](https://ThisPersonDoesNotExist.com) and then feeding those synthetic 2D images into [TripoSR](https://github.com/VAST-AI-Research/TripoSR) to turn them into 3D heads, the dataset is on huggingface here: https://huggingface.co/datasets/tfnn/FaceTo3D
+The dataset all this was trained on is a synthetic dataset I generated from StyleGAN2 using [ThisPersonDoesNotExist.com](https://ThisPersonDoesNotExist.com) and then feeding those synthetic 2D images into [TripoSR](https://github.com/VAST-AI-Research/TripoSR) to turn them into 3D heads, the dataset is on Hugging Face here: https://huggingface.co/datasets/tfnn/FaceTo3D
 
 The first attempt was PT-NePC in ["headsnet"](headsnet). HeadsNet was the highest quality attempt. It took a simple two vector input to produce a random full color 3D point cloud of a head. It includes the scraper, a viewer for the scraped models, the dataset generator, training and prediction code.
 
