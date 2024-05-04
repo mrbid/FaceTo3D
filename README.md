@@ -1,7 +1,7 @@
 This is based on work in my Hugging Face repository here:
 https://huggingface.co/datasets/tfnn/HeadsNet
 
-The Hugging Face repository has the full project including the dataset, this GitHub repository just stands to hold the bare code.
+The Hugging Face repository has the full project including the dataset _(I also go into a little more detail)_, this GitHub repository just stands to hold the bare code.
 
 It all started with this rough idea that I had after spending much time looking into Neural Radiance Fields (NeRF) for generative 3D:
 https://gist.github.com/mrbid/1eacdd9d9239b2d324a3fa88591ff852
