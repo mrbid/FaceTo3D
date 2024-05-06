@@ -1,4 +1,6 @@
 alias fit='./fit_multi.sh'
 alias pred='./pred_multi.sh;./cat_pred_multi.sh'
 alias prev='python3 view_pred_final.py'
-echo "Aliases fit,pred,prev set. To be used in that order."
+alias cleanall='rm -rf models;rm -rf pred_multi;rm -rf pred_multi_final;'
+alias cleanpred='rm -rf pred_multi;rm -rf pred_multi_final;'
+echo "Aliases fit,pred,prev set to be used in that order; & cleanall,cleanpred set."
