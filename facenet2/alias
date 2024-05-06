@@ -1,0 +1,4 @@
+alias fit='./fit_multi.sh'
+alias pred='./pred_multi.sh;./cat_pred_multi.sh'
+alias prev='python3 view_pred_final.py'
+echo "Aliases fit,pred,prev set. To be used in that order."
