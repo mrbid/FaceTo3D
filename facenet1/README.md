@@ -9,11 +9,11 @@ You will now have a `ply` directory full of 3D heads.
 4. run `remove_pgm_header.sh` and wait for it to finish
 5. run `faces3_to_trainx.sh` and wait for it to finish
 
-You now have a train_x.dat.
+You now have a `train_x.dat`.
 
-In the directory `train_y_gen/` is the C program that will read the `ply` directory and create a train_y.dat of 32^3 voxel volumes from the 3D meshes of heads.
+In the directory `train_y_gen/` is the C program that will read the `ply` directory and create a `train_y.dat` of 32^3 voxel volumes from the 3D meshes of heads.
 
-Once you have your train_x.dat and train_y.dat you are ready to train a network, train_x is the inputs and train_y is the target outputs. These files are in uint8 format.
+Once you have your `train_x.dat` and `train_y.dat` you are ready to train a network, `train_x` is the inputs and `train_y` is the target outputs. These files are in uint8 format.
 
 ## index
 
