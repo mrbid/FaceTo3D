@@ -15,6 +15,9 @@ In the directory `train_y_gen/` is the C program that will read the `ply` direct
 
 Once you have your `train_x.dat` and `train_y.dat` you are ready to train a network, `train_x` is the inputs and `train_y` is the target outputs. These files are in uint8 format.
 
+## use pre-generated dataset
+Unzip [facenet_dataset.7z](facenet_dataset.7z).
+
 ## index
 
 - `fit.py` - train network
