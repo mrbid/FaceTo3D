@@ -20,4 +20,4 @@ cleanpred
 
 Training parameters are configured in [fit.py](https://github.com/mrbid/FaceTo3D/blob/main/facenet2/fit.py#L19).
 
-You can terminate a fit (training) or pred (prediction) process at any point and it will restart where it last left off. To start anew use the `cleanall` or `cleanpred` alises.
+You can terminate a fit _(training)_ or pred _(prediction)_ process at any point and it will restart where it last left off. To start anew use the `cleanall` or `cleanpred` alises.
