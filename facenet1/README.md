@@ -18,4 +18,4 @@ Once you have your `train_x.dat` and `train_y.dat` you are ready to train a netw
 ## index
 
 - `fit.py` - train network
-- `pred.py` - predict using a trained network model
+- `pred.py <input_image_path> <model_path>` - predict using a trained network model
