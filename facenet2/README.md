@@ -17,3 +17,5 @@ cleanall
 source alias
 cleanpred
 ```
+
+Training parameters are configured in [fit.py](https://github.com/mrbid/FaceTo3D/blob/main/facenet2/fit.py#L19).
