@@ -77,12 +77,14 @@ print("Time Taken:", "{:.2f}".format(timetaken), "seconds")
 ##########################################
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import Dense
 print("\n--Training Model")
 
 # construct neural network
 model = Sequential()
-model.add(Dense(layer_units, activation=activator, use_bias=use_bias, input_dim=inputsize))
+model.add(Input(shape=(inputsize,)))
+model.add(Dense(layer_units, activation=activator, use_bias=use_bias))
 if layers > 0:
     for x in range(layers):
         model.add(Dense(layer_units, use_bias=use_bias, activation=activator))
