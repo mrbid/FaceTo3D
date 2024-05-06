@@ -22,3 +22,5 @@ Unzip [facenet_dataset.7z](facenet_dataset.7z).
 
 - `fit.py` - train network
 - `pred.py <input_image_path> <model_path>` - predict using a trained network model
+
+Training parameters are configured in [fit.py](https://github.com/mrbid/FaceTo3D/blob/main/facenet1/fit.py#L21).
