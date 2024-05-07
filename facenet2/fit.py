@@ -137,7 +137,6 @@ print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds")
 # export model
 print("\n--Exporting Model")
 if not isdir('models'): mkdir('models')
-if not isdir(model_name): mkdir(model_name)
 st = time_ns()
 
 # save keras model
@@ -147,44 +146,45 @@ model.save(model_name + ".keras")
 timetaken = (time_ns()-st)/1e+9
 print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
 
-# save weights for C array
-print("")
-print("Exporting weights...")
-st = time_ns()
-li = 0
-f = open(model_name + "/" + project + "_layers.h", "w")
-f.write("#ifndef " + project + "_layers\n#define " + project + "_layers\n\n// accuracy: " + "{:.8f}".format(history.history['accuracy'][-1]) + "\n// loss: " + "{:.8f}".format(history.history['loss'][-1]) + "\n\n")
-if f:
-    for layer in model.layers:
-        total_layer_weights = layer.get_weights()[0].transpose().flatten().shape[0]
-        total_layer_units = layer.units
-        layer_weights_per_unit = total_layer_weights / total_layer_units
-        print("+ Layer:", li)
-        print("Total layer weights:", total_layer_weights)
-        print("Total layer units:", total_layer_units)
-        print("Weights per unit:", int(layer_weights_per_unit))
+# # save weights for C array
+# if not isdir(model_name): mkdir(model_name)
+# print("")
+# print("Exporting weights...")
+# st = time_ns()
+# li = 0
+# f = open(model_name + "/" + project + "_layers.h", "w")
+# f.write("#ifndef " + project + "_layers\n#define " + project + "_layers\n\n// accuracy: " + "{:.8f}".format(history.history['accuracy'][-1]) + "\n// loss: " + "{:.8f}".format(history.history['loss'][-1]) + "\n\n")
+# if f:
+#     for layer in model.layers:
+#         total_layer_weights = layer.get_weights()[0].transpose().flatten().shape[0]
+#         total_layer_units = layer.units
+#         layer_weights_per_unit = total_layer_weights / total_layer_units
+#         print("+ Layer:", li)
+#         print("Total layer weights:", total_layer_weights)
+#         print("Total layer units:", total_layer_units)
+#         print("Weights per unit:", int(layer_weights_per_unit))
 
-        f.write("const float " + project + "_layer" + str(li) + "[] = {")
-        isfirst = 0
-        wc = 0
-        bc = 0
-        if layer.get_weights() != []:
-            for weight in layer.get_weights()[0].transpose().flatten():
-                wc += 1
-                if isfirst == 0:
-                    f.write(str(weight))
-                    isfirst = 1
-                else:
-                    f.write("," + str(weight))
-                if wc == layer_weights_per_unit:
-                    f.write(", /* bias */ " + str(layer.get_weights()[1].transpose().flatten()[bc]))
-                    wc = 0
-                    bc += 1
-        f.write("};\n\n")
-        li += 1
-f.write("#endif\n")
-f.close()
+#         f.write("const float " + project + "_layer" + str(li) + "[] = {")
+#         isfirst = 0
+#         wc = 0
+#         bc = 0
+#         if layer.get_weights() != []:
+#             for weight in layer.get_weights()[0].transpose().flatten():
+#                 wc += 1
+#                 if isfirst == 0:
+#                     f.write(str(weight))
+#                     isfirst = 1
+#                 else:
+#                     f.write("," + str(weight))
+#                 if wc == layer_weights_per_unit:
+#                     f.write(", /* bias */ " + str(layer.get_weights()[1].transpose().flatten()[bc]))
+#                     wc = 0
+#                     bc += 1
+#         f.write("};\n\n")
+#         li += 1
+# f.write("#endif\n")
+# f.close()
 
-# print timing
-timetaken = (time_ns()-st)/1e+9
-print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
+# # print timing
+# timetaken = (time_ns()-st)/1e+9
+# print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
