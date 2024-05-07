@@ -29,6 +29,7 @@ batches = 9
 epoches = 333
 use_bias = True
 dataset_size = 3333
+dataset_limit = 0
 
 # load option
 tylfn = ""
@@ -61,6 +62,11 @@ else:
     load_y = load_y / 255
     train_y = np.reshape(load_y, [dataset_size, outputsize])
     np.save(npy_tylfn, train_y)
+
+# tunc
+if dataset_limit > 0:
+    train_x = train_x[:dataset_limit]
+    train_y = train_y[:dataset_limit]
 
 timetaken = (time_ns()-st)/1e+9
 print("Time Taken:", "{:.2f}".format(timetaken), "seconds")
