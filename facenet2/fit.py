@@ -4,10 +4,8 @@ import os
 import numpy as np
 from time import time_ns
 from sys import exit
-from os import mkdir
-from os.path import isdir
-from os.path import isfile
 from pathlib import Path
+from os.path import isfile
 
 # disable warnings
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -24,9 +22,9 @@ inputsize = 1024
 outputsize = 1
 activator = 'selu'
 layers = 4
-layer_units = 32
-batches = 9
-epoches = 333
+layer_units = 168
+batches = 3
+epoches = 166
 use_bias = True
 dataset_size = 3333
 dataset_limit = 0
@@ -136,7 +134,7 @@ print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds")
 
 # export model
 print("\n--Exporting Model")
-if not isdir('models'): mkdir('models')
+os.makedirs('models', exist_ok=True)
 st = time_ns()
 
 # save keras model
@@ -147,9 +145,9 @@ timetaken = (time_ns()-st)/1e+9
 print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
 
 # # save weights for C array
-# if not isdir(model_name): mkdir(model_name)
 # print("")
 # print("Exporting weights...")
+# os.makedirs(model_name, exist_ok=True)
 # st = time_ns()
 # li = 0
 # f = open(model_name + "/" + project + "_layers.h", "w")
