@@ -1,4 +1,5 @@
 # github.com/mrbid
+# this is defunct there is no reason why anyone would use this over pred_multi.py
 import sys
 import os
 import numpy as np
