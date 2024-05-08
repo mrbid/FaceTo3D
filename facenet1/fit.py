@@ -2,13 +2,8 @@
 import sys
 import os
 import numpy as np
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 from time import time_ns
 from sys import exit
-from os import mkdir
-from os.path import isdir
 from os.path import isfile
 
 # disable warnings
@@ -25,43 +20,13 @@ optimiser = 'adam'
 inputsize = 1024
 outputsize = 32768
 activator = 'selu'
-layers = 3
-layer_units = 384
+layers = 6
+layer_units = 32
 batches = 6
-epoches = 3
+epoches = 777
 use_bias = True
 dataset_size = 3333
-dataset_limit = 0
-
-# load options
-argc = len(sys.argv)
-if argc >= 2:
-    layers = int(sys.argv[1])
-    print("layers:", layers)
-if argc >= 3:
-    layer_units = int(sys.argv[2])
-    print("layer_units:", layer_units)
-if argc >= 4:
-    batches = int(sys.argv[3])
-    print("batches:", batches)
-if argc >= 5:
-    activator = sys.argv[4]
-    print("activator:", activator)
-if argc >= 6:
-    optimiser = sys.argv[5]
-    print("optimiser:", optimiser)
-if argc >= 7 and sys.argv[6] == '1':
-    os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-    print("CPU_ONLY: 1")
-if argc >= 8:
-    epoches = int(sys.argv[7])
-    print("epoches:", epoches)
-if argc >= 9:
-    dataset_size = int(sys.argv[8])
-    print("dataset_size:", dataset_size)
-if argc >= 10:
-    dataset_limit = int(sys.argv[9])
-    print("dataset_limit:", dataset_limit)
+dataset_limit = 90
 
 # make sure save dir exists
 model_name = 'models/' + activator + '_' + optimiser + '_' + str(layers) + '_' + str(layer_units) + '_' + str(batches) + '_' + str(epoches)
@@ -75,17 +40,10 @@ print("\n--Loading Dataset")
 st = time_ns()
 
 print("Dataset Elements:", "{:,}".format(dataset_size))
-if dataset_limit > 0:
-    print("Dataset Limit/Load Size:", "{:,}".format(dataset_limit))
-    dataset_size = dataset_limit
 
 if isfile("train_x.npy"):
-    if dataset_limit > 0:
-        train_x = np.load("train_x.npy")[:dataset_limit]
-        train_y = np.load("train_y.npy")[:dataset_limit]
-    else:
-        train_x = np.load("train_x.npy")
-        train_y = np.load("train_y.npy")
+    train_x = np.load("train_x.npy")
+    train_y = np.load("train_y.npy")
 else:
     load_x = []
     with open("train_x.dat", 'rb') as f:
@@ -102,6 +60,11 @@ else:
     np.save("train_x.npy", train_x)
     np.save("train_y.npy", train_y)
 
+if dataset_limit > 0:
+    print("Dataset Limit/Load Size:", "{:,}".format(dataset_limit))
+    train_x = train_x[:dataset_limit]
+    train_y = train_y[:dataset_limit]
+
 timetaken = (time_ns()-st)/1e+9
 print("Time Taken:", "{:.2f}".format(timetaken), "seconds")
 
@@ -115,11 +78,16 @@ print("Time Taken:", "{:.2f}".format(timetaken), "seconds")
 ##########################################
 #   TRAIN
 ##########################################
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Dense
 print("\n--Training Model")
 
 # construct neural network
 model = Sequential()
-model.add(Dense(layer_units, activation=activator, use_bias=use_bias, input_dim=inputsize))
+model.add(Input(shape=(inputsize,)))
+model.add(Dense(layer_units, activation=activator, use_bias=use_bias))
 if layers > 0:
     for x in range(layers):
         model.add(Dense(layer_units, use_bias=use_bias, activation=activator))
@@ -166,8 +134,7 @@ print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds")
 
 # export model
 print("\n--Exporting Model")
-if not isdir('models'): mkdir('models')
-if not isdir(outdir_name): mkdir(outdir_name)
+os.makedirs('models', exist_ok=True)
 st = time_ns()
 
 # save keras model
@@ -177,44 +144,45 @@ model.save(model_name + ".keras")
 timetaken = (time_ns()-st)/1e+9
 print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
 
-# save weights for C array
-print("")
-print("Exporting weights...")
-st = time_ns()
-li = 0
-f = open(outdir_name + "/" + project + "_layers.h", "w")
-f.write("#ifndef " + project + "_layers\n#define " + project + "_layers\n\n// accuracy: " + "{:.8f}".format(history.history['accuracy'][-1]) + "\n// loss: " + "{:.8f}".format(history.history['loss'][-1]) + "\n\n")
-if f:
-    for layer in model.layers:
-        total_layer_weights = layer.get_weights()[0].transpose().flatten().shape[0]
-        total_layer_units = layer.units
-        layer_weights_per_unit = total_layer_weights / total_layer_units
-        print("+ Layer:", li)
-        print("Total layer weights:", total_layer_weights)
-        print("Total layer units:", total_layer_units)
-        print("Weights per unit:", int(layer_weights_per_unit))
+# # save weights for C array
+# print("")
+# print("Exporting weights...")
+# os.makedirs(model_name, exist_ok=True)
+# st = time_ns()
+# li = 0
+# f = open(outdir_name + "/" + project + "_layers.h", "w")
+# f.write("#ifndef " + project + "_layers\n#define " + project + "_layers\n\n// accuracy: " + "{:.8f}".format(history.history['accuracy'][-1]) + "\n// loss: " + "{:.8f}".format(history.history['loss'][-1]) + "\n\n")
+# if f:
+#     for layer in model.layers:
+#         total_layer_weights = layer.get_weights()[0].transpose().flatten().shape[0]
+#         total_layer_units = layer.units
+#         layer_weights_per_unit = total_layer_weights / total_layer_units
+#         print("+ Layer:", li)
+#         print("Total layer weights:", total_layer_weights)
+#         print("Total layer units:", total_layer_units)
+#         print("Weights per unit:", int(layer_weights_per_unit))
 
-        f.write("const float " + project + "_layer" + str(li) + "[] = {")
-        isfirst = 0
-        wc = 0
-        bc = 0
-        if layer.get_weights() != []:
-            for weight in layer.get_weights()[0].transpose().flatten():
-                wc += 1
-                if isfirst == 0:
-                    f.write(str(weight))
-                    isfirst = 1
-                else:
-                    f.write("," + str(weight))
-                if wc == layer_weights_per_unit:
-                    f.write(", /* bias */ " + str(layer.get_weights()[1].transpose().flatten()[bc]))
-                    wc = 0
-                    bc += 1
-        f.write("};\n\n")
-        li += 1
-f.write("#endif\n")
-f.close()
+#         f.write("const float " + project + "_layer" + str(li) + "[] = {")
+#         isfirst = 0
+#         wc = 0
+#         bc = 0
+#         if layer.get_weights() != []:
+#             for weight in layer.get_weights()[0].transpose().flatten():
+#                 wc += 1
+#                 if isfirst == 0:
+#                     f.write(str(weight))
+#                     isfirst = 1
+#                 else:
+#                     f.write("," + str(weight))
+#                 if wc == layer_weights_per_unit:
+#                     f.write(", /* bias */ " + str(layer.get_weights()[1].transpose().flatten()[bc]))
+#                     wc = 0
+#                     bc += 1
+#         f.write("};\n\n")
+#         li += 1
+# f.write("#endif\n")
+# f.close()
 
-# print timing
-timetaken = (time_ns()-st)/1e+9
-print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
+# # print timing
+# timetaken = (time_ns()-st)/1e+9
+# print("\nTime Taken:", "{:.2f}".format(timetaken), "seconds\n")
