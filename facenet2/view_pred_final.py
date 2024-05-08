@@ -25,11 +25,12 @@ coords = []
 grayscale_values = []  # Store grayscale values for coloring
 
 for index in range(len(indices)):
-    x = index % 32
-    y = (index // 32) % 32
-    z = index // 1024
-    coords.append((x, y, z))
-    grayscale_values.append(indices[index])  # Use index as the grayscale value
+    if indices[index] > 0:
+        x = index % 32
+        y = (index // 32) % 32
+        z = index // 1024
+        coords.append((x, y, z))
+        grayscale_values.append(indices[index])  # Use index as the grayscale value
 
 # Convert the list of coordinates to a numpy array
 coords_np = np.array(coords)
