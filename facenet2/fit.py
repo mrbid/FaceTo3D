@@ -100,26 +100,8 @@ model.summary()
 
 if optimiser == 'adam':
     optim = keras.optimizers.Adam(learning_rate=0.001)
-elif optimiser == 'sgd':
-    lr_schedule = keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=0.3, decay_steps=epoches*dataset_size, decay_rate=0.1)
-    #lr_schedule = keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=0.1, decay_steps=epoches*dataset_size, decay_rate=0.01)
-    optim = keras.optimizers.SGD(learning_rate=lr_schedule, momentum=0.0, nesterov=False)
-elif optimiser == 'momentum':
-    optim = keras.optimizers.SGD(learning_rate=0.01, momentum=0.9, nesterov=False)
-elif optimiser == 'nesterov':
-    optim = keras.optimizers.SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
-elif optimiser == 'nadam':
-    optim = keras.optimizers.Nadam(learning_rate=0.001)
-elif optimiser == 'adagrad':
-    optim = keras.optimizers.Adagrad(learning_rate=0.001)
-elif optimiser == 'rmsprop':
-    optim = keras.optimizers.RMSprop(learning_rate=0.001)
-elif optimiser == 'adadelta':
-    optim = keras.optimizers.Adadelta(learning_rate=0.001)
 elif optimiser == 'adamax':
     optim = keras.optimizers.Adamax(learning_rate=0.001)
-elif optimiser == 'ftrl':
-    optim = keras.optimizers.Ftrl(learning_rate=0.001)
 
 model.compile(optimizer=optim, loss='mean_squared_error', metrics=['accuracy'])
 
