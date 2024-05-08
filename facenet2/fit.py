@@ -63,6 +63,7 @@ else:
 
 # tunc
 if dataset_limit > 0:
+    print("Dataset Limit/Load Size:", "{:,}".format(dataset_limit))
     train_x = train_x[:dataset_limit]
     train_y = train_y[:dataset_limit]
 
