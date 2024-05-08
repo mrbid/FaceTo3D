@@ -24,7 +24,7 @@ indices = data.tolist()  # Convert to a list
 coords = []
 grayscale_values = []  # Store grayscale values for coloring
 
-for index in range(len(indices)):
+for index in range(32768):
     if indices[index] > 0:
         x = index % 32
         y = (index // 32) % 32
