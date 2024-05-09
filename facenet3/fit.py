@@ -79,14 +79,17 @@ from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import Dense
 print("\n--Training Model")
 
+# weight init
+weight_init = keras.initializers.GlorotUniform() # GlorotUniform(), LecunNormal()
+
 # construct neural network
 model = Sequential()
 model.add(Input(shape=(inputsize,)))
-model.add(Dense(layer_units, activation=activator, use_bias=use_bias))
+model.add(Dense(layer_units, activation=activator, use_bias=use_bias, kernel_initializer=weight_init))
 if layers > 0:
     for x in range(layers):
-        model.add(Dense(layer_units, use_bias=use_bias, activation=activator))
-model.add(Dense(outputsize, use_bias=use_bias))
+        model.add(Dense(layer_units, use_bias=use_bias, activation=activator, kernel_initializer=weight_init))
+model.add(Dense(outputsize, use_bias=use_bias, kernel_initializer=weight_init))
 
 # output summary
 model.summary()
