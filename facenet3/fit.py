@@ -1,4 +1,5 @@
-# github.com/mrbid
+# James William Fletcher (github.com/mrbid) May 2024
+# GlorotUniform, ADAM, RELU/SELU
 import sys
 import os
 import numpy as np
