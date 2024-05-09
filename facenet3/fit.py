@@ -17,7 +17,7 @@ np.set_printoptions(threshold=sys.maxsize)
 # hyperparameters
 inputsize = 1024
 outputsize = 32768
-learning_rate = 0.01 # 0.001 - 0.1 is fine
+learning_rate = 0.001 # 0.001 - 0.1 is fine
 activator = 'selu' # selu, gelu, mish, relu, relu6, silu, hard_silu, hard_sigmoid, softsign, softplus, softmax, sigmoid
 layers = 6
 layer_units = 32
