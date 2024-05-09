@@ -1,4 +1,4 @@
-# github.com/mrbid
+# James William Fletcher (github.com/mrbid) April 2024
 import sys
 import os
 import random
