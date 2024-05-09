@@ -1,5 +1,5 @@
 # James William Fletcher (github.com/mrbid) May 2024
-# GlorotUniform, ADAM, RELU/GELU, MeanSquaredError
+# GlorotUniform/LecunNormal, Adam/Adamax, ReLU/GeLU, MeanSquaredError
 import sys
 import os
 import numpy as np
