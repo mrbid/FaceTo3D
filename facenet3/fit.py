@@ -1,5 +1,5 @@
 # James William Fletcher (github.com/mrbid) May 2024
-# GlorotUniform, ADAM, RELU/SELU, MeanSquaredError
+# GlorotUniform, ADAM, RELU/GELU, MeanSquaredError
 import sys
 import os
 import numpy as np
@@ -18,7 +18,7 @@ np.set_printoptions(threshold=sys.maxsize)
 inputsize = 1024
 outputsize = 32768
 learning_rate = 0.001 # 0.001 - 0.1 is fine
-activator = 'selu' # selu, gelu, mish, relu, relu6, silu, hard_silu, hard_sigmoid, softsign, softplus, softmax, sigmoid
+activator = 'gelu' # selu, gelu, mish, relu, relu6, silu, hard_silu, hard_sigmoid, softsign, softplus, softmax, sigmoid
 layers = 6
 layer_units = 32
 batches = 6
