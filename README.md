@@ -18,3 +18,7 @@ The dataset this was trained on is a synthetic dataset I generated from [StyleGA
 This project deliberately focuses on [MLP's](https://en.wikipedia.org/wiki/Multilayer_perceptron) while ignoring [VAE's](https://en.wikipedia.org/wiki/Variational_autoencoder) which would be a more traditional use case.
 
 Training was done on a single [HPE ProLiant DL580 Gen9](https://www.hpe.com/psnow/doc/c04601208) with [Intel® Xeon® E7-8880 v4](https://www.intel.com/content/www/us/en/products/sku/93792/intel-xeon-processor-e78880-v4-55m-cache-2-20-ghz/specifications.html). Although I could have done with a few of these to be honest! 32 of them would reduce the training process from a week or multiple weeks to just a few hours or days. Being able to perform faster tests allows one to hone in on a working and quality model much faster.
+
+---
+
+An example of ground truth outputs that facenet is trained on is [facenet_ground_truth.7z](https://github.com/mrbid/FaceTo3D/raw/main/facenet_ground_truth.7z).
