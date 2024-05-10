@@ -20,14 +20,14 @@ model_name = 'keras_model'
 optimiser = 'adam'
 inputsize = 1024
 outputsize = 1
-activator = 'selu'
-layers = 4
-layer_units = 168
-batches = 3
+activator = 'gelu'
+layers = 6
+layer_units = 32
+batches = 6
 epoches = 166
 use_bias = True
 dataset_size = 3333
-dataset_limit = 0
+dataset_limit = 90
 
 # load option
 tylfn = ""
