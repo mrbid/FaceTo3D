@@ -4,4 +4,4 @@ Edit the training parameters in [fit.py](https://github.com/mrbid/FaceTo3D/blob/
 
 ---
 
-A trained model from this network is [facenet3_model_1.7z](facenet3_model_1.7z). This can be used to generate 3D outputs from 2D inputs, the problem being is that it generates the same average head invariant of the input.
+A trained model from this network is [facenet3_model_1.7z](https://github.com/mrbid/FaceTo3D/raw/main/facenet3/facenet3_model_1.7z). This can be used to generate 3D outputs from 2D inputs, the problem being is that it generates the same average head invariant of the input.
