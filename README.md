@@ -1,3 +1,5 @@
+[Update 23-09-26] There is a bug in [train_y_gen](facenet2/train_y_gen) that caused the subsequent dataset to be generated incorrectly, as such the provided dataset is 'poisoned' and that's why in the code I limited the dataset to the first 90 samples. Fixing this bug is mildly advantageous. The network still doesn't produce anything exciting, head shapes for the 32x32x32 voxel volume output no faces.
+
 ### This repository holds the most upto-date versions of the scripts.
 
 This is based on work in my Hugging Face repository ["HeadsNet"](https://huggingface.co/datasets/tfnn/HeadsNet).
